@@ -21,8 +21,8 @@
 */
 
 #include <stdio.h>
-#include "common.h"
-#include "utf8small.h"
+#include <common.h>
+#include <utf8small.h>
 
 /* ----------------------------------------------------------------------- */
 /* Helpers */

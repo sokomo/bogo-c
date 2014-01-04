@@ -92,8 +92,8 @@
 #include <wchar.h>
 #include <string.h>
 
-#include "bogo.h"
-#include "utf8small.h"
+#include <bogo.h>
+#include <utf8small.h>
 
 
 const bgstr VOWELS = "àáảãạaằắẳẵặăầấẩẫậâèéẻẽẹeềếểễệêìíỉĩịi" \
