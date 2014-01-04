@@ -3,12 +3,13 @@
 #include <stdlib.h>
 #include <wchar.h>
 
-#include "string.h"
-#include "bogo.h"
-#include "list.h"
-#include "dsl.h"
+#include <string.h>
+#include <bogo.h>
+#include <list.h>
+#include <dsl.h>
 
-int main() {
+int main()
+{
     if (!setlocale(LC_CTYPE, "")) {
       fprintf(stderr, "Can't set the specified locale! "
               "Check LANG, LC_CTYPE, LC_ALL.\n");
