@@ -1,62 +1,35 @@
-UTF8_SRC = utf8small.c utf8small.h
-UNITTEST_SRC = unittest.h unittest.c
-BOGO_SRC = bogo.c dsl.c
 
-BOGO_EXEC = $(BUILD_DIR)/bogo
+MAKEFILE_FLAGS   :=
 
-TRYOUT_MAIN_SRC           = tryout/tryout.c
-TRYOUT_UNITTEST_PASS_SRC  = tryout/tryout_unittest_pass.c
-TRYOUT_UNITTEST_FAIL_SRC  = tryout/tryout_unittest_fail.c
 
-SRC_FILES = $(UTF8_SRC) $(UNITTEST_SRC)
-BUILD_DIR = ../build
+.PHONY: all
+all: release
 
-TRYOUT_UNITTEST_PASS_EXEC  = $(BUILD_DIR)/tryout_unittest_pass
-TRYOUT_UNITTEST_FAIL_EXEC  = $(BUILD_DIR)/tryout_unittest_fail
-TRYOUT_MAIN_EXEC           = $(BUILD_DIR)/tryout_main
+.PHONY: debug
+debug:	MAKEFILE_FLAGS := debug
+debug:	build_app
 
-INCLUDE = ./
 
-.PHONY: clean tryout
+.PHONY:	release
+release:	MAKEFILE_FLAGS := release
+release:	build_app
 
-clean:
-	rm -rf \
-		*.o *.i *.gch *.a \
-		$(BUILD_DIR)
+.PHONY:	test
+test:	debug
+	$(MAKE) -C unittest $(MAKEFILE_FLAGS)
 
-tryout: $(TRYOUT_MAIN_SRC)
-	@mkdir -p $(BUILD_DIR)
+.PHONY: install
+install:	MAKEFILE_FLAGS := release
+install:	build_app
 
-	@$(CC) -o $(TRYOUT_MAIN_EXEC) \
-		-I$(INCLUDE) \
-		$(UTF8_SRC) \
-		$(TRYOUT_MAIN_SRC)
-	$(TRYOUT_MAIN_EXEC) < ../test_data/utf8_input.txt
+.PHONY: clean
+clean: MAKEFILE_FLAGS := clean
+clean:	build_app
+	$(MAKE) -C unittest $(MAKEFILE_FLAGS)
 
-tryout_unittest:
-	@mkdir -p $(BUILD_DIR)
+.PHONY:	build_app
+build_app:
+	$(MAKE) -C utf8small $(MAKEFILE_FLAGS)
+	$(MAKE) -C engine $(MAKEFILE_FLAGS)
+	$(MAKE) -C excution $(MAKEFILE_FLAGS)
 
-	@$(CC) -o $(TRYOUT_UNITTEST_PASS_EXEC) \
-		-I$(INCLUDE) \
-		$(TRYOUT_UNITTEST_PASS_SRC) \
-		$(UNITTEST_SRC)
-
-	@$(CC) -o $(TRYOUT_UNITTEST_FAIL_EXEC) \
-		-I$(INCLUDE) \
-		$(TRYOUT_UNITTEST_FAIL_SRC) \
-		$(UNITTEST_SRC)
-
-	$(TRYOUT_UNITTEST_PASS_EXEC)
-	$(TRYOUT_UNITTEST_FAIL_EXEC)
-
-bogo: $(BOGO_SRC)
-	@mkdir -p $(BUILD_DIR)
-
-	@$(CC) -o $(BOGO_EXEC) \
-		-I$(INCLUDE) \
-		-std=c99 \
-		-g \
-		-shared \
-		-fPIC \
-		$(BOGO_SRC) \
-		$(UTF8_SRC)

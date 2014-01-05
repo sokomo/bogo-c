@@ -20,7 +20,7 @@
 */
 
 #include <ctype.h>
-#include "unittest.h"
+#include <unittest.h>
 
 /* ----------------------------------------------------------------------- */
 /* Helpers */
