@@ -1,9 +1,9 @@
-TARGET		       = bogo
-OBJS	           = main.o
-SRCS		         = $(OBJS:.o=.c)
-INCLUDEDIRS	    += -I../../include
-LIBDIRS		      += -L../lib
-LDFLAGS		      += $(LIBDIRS) -lbogoengine -lutf8small -lm
+TARGET           = bogo
+OBJS             = main.o
+SRCS             = $(OBJS:.o=.c)
+INCLUDEDIRS     += -I../../include
+LIBDIRS         += -L../lib
+LDFLAGS         += $(LIBDIRS) -lbogoengine -lutf8small -lm
 CFLAGS          += -W -Wall
 DEBUG_FLAGS      = -g3 -DDEBUG_ALL
 RELEASE_FLAGS    = -O2
@@ -46,14 +46,14 @@ copy_target:
 
 
 .PHONY: debug
-debug:	CFLAGS += $(DEBUG_FLAGS)
-debug:	$(TARGET)
-debug:	copy_target
+debug:  CFLAGS += $(DEBUG_FLAGS)
+debug:  $(TARGET)
+debug:  copy_target
 
 .PHONY: release
-release:	CFLAGS += $(RELEASE_FLAGS)
-release:	$(TARGET)
-release:	copy_target
+release:  CFLAGS += $(RELEASE_FLAGS)
+release:  $(TARGET)
+release:  copy_target
 
 .PHONY: clean
 clean:

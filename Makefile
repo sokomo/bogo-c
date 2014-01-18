@@ -13,8 +13,8 @@
 # DEBUG_FLAGS and REALEASE_FLAGS cannot be overwrite
 
 # export INCLUDEDIRS     += -I../../include
-# export LIBDIRS		      += -L../lib
-# export LDFLAGS		      += $(LIBDIRS) -lm
+# export LIBDIRS         += -L../lib
+# export LDFLAGS         += $(LIBDIRS) -lm
 # export CFLAGS          += -W -Wall -std=c99
 export CFLAGS          += -std=c99
 # export ARCH            ?=
@@ -40,29 +40,29 @@ export CFLAGS          += -std=c99
 all: release
 
 .PHONY: debug
-debug:	MAKEFILE_FLAGS := debug
-debug:	build_app
+debug:  MAKEFILE_FLAGS := debug
+debug:  build_app
 
 
 .PHONY:	release
-release:	MAKEFILE_FLAGS := release
-release:	build_app
+release:  MAKEFILE_FLAGS := release
+release:  build_app
 
 .PHONY:	test
-test:	MAKEFILE_FLAGS := test
+test: MAKEFILE_FLAGS := test
 test: build_app
 	$(MAKE) -C tests
 
 .PHONY: install
-install:	MAKEFILE_FLAGS := release
-install:	build_app
+install: MAKEFILE_FLAGS := release
+install: build_app
 
 .PHONY: clean
 clean: MAKEFILE_FLAGS := clean
-clean:	build_app
+clean:  build_app
 	$(MAKE) -C tests $(MAKEFILE_FLAGS)
 
-.PHONY:	build_app
+.PHONY: build_app
 build_app:
 	$(MAKE) -C src $(MAKEFILE_FLAGS)
 

@@ -1,9 +1,9 @@
-TARGET		       = libunittest.a
-OBJS	           = unittest.o
-SRCS		         = $(OBJS:.o=.c)
-INCLUDEDIRS	    += -I../../include
-LIBDIRS		      += -L../lib
-LDFLAGS		      += $(LIBDIRS) -lm
+TARGET           = libunittest.a
+OBJS             = unittest.o
+SRCS             = $(OBJS:.o=.c)
+INCLUDEDIRS     += -I../../include
+LIBDIRS         += -L../lib
+LDFLAGS         += $(LIBDIRS) -lm
 CFLAGS          += -W -Wall
 DEBUG_FLAGS      = -g3 -DDEBUG_ALL
 RELEASE_FLAGS    = -O2
@@ -54,7 +54,7 @@ debug:	$(TARGET)
 debug:	copy_target
 
 .PHONY: release
-release:	CFLAGS += $(RELEASE_FLAGS)
+release:  CFLAGS += $(RELEASE_FLAGS)
 release:  $(TARGET)
 release:  copy_target
 

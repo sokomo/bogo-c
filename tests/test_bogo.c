@@ -24,9 +24,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
-#include "unittest.h"
+#include <unittest.h>
 
-#include "bogo.c"
+#include "bogo.h"
 #include "dsl.h"
 
 int testFindMarkTarget(void) {
@@ -130,7 +130,8 @@ int testProcessString(void) {
 int main (int argc, char *argv[]) {
 
     addTest (testFindMarkTarget);
-    addTest (testTest);
+    //addTest (testTest);
+    addTest (testProcessString);
 
     runAllTests ();
 
